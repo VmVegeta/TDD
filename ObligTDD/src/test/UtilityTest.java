@@ -52,5 +52,34 @@ public class UtilityTest {
 		assertEquals(stringFor2, utility.turnToString(2));
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+    public void turnToString_over24() {
+        String stringForOver = "000000000000000000000000";
+        assertEquals(stringForOver, utility.turnToString(66777215));
+    }
+	
+	@Test(expected = IllegalArgumentException.class)
+    public void turnToString_under0() {
+        String stringForOver = "000000000000000000000000";
+        assertEquals(stringForOver, utility.turnToString(-1));
+    }
+	
+	@Test
+	public void turnToString_highEdge_16777215() {
+		String stringForHighCase = "111111111111111111111111";
+		assertEquals(stringForHighCase, utility.turnToString(16777215));
+	}
+	
+	@Test
+	public void turnToString_lowEdge_0() {
+		String stringForLowCase = "000000000000000000000000";
+		assertEquals(stringForLowCase, utility.turnToString(0));
+	}
+	
+	@Test
+	public void turnToIntFromHex_1() {
+		String valueTo1 = "000001";
+		assertEquals(1, utility.turnToIntFromHex(valueTo1));
+	}
 
 }

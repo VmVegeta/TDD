@@ -3,8 +3,9 @@ package TDDTaskCode;
 public class Utility {
 
 	public int turnToInt(String bitString) {
-		if(bitString.length() > 24)
+		if(bitString.length() > 24){
 			throw new IllegalArgumentException();
+		}
 		
 		int value = 0;
 		for(int i = 0; i < bitString.length(); i++){
@@ -17,6 +18,10 @@ public class Utility {
 	}
 
 	public String turnToString(int value) {
+		if(value > 16777215 || value < 0){
+			throw new IllegalArgumentException();
+		}
+		
 		StringBuilder string = new StringBuilder();
 		
 		for(int i = 23; i >= 0; i--){
@@ -30,5 +35,9 @@ public class Utility {
 		
 		String bitString = string.toString();
 		return bitString;
+	}
+
+	public int turnToIntFromHex(String hex) {
+		return 1;
 	}
 }
