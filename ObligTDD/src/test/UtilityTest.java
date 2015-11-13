@@ -21,5 +21,29 @@ public class UtilityTest {
 		String valueTo2 = "00000010";
 		assertEquals(2, utility.turnToInt(valueTo2));
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void turnToInt_underSize24() {
+		String toBig = "00000000000000000000000000";
+		assertEquals(0,utility.turnToInt(toBig));
+	}
+	
+	@Test
+	public void turnToInt_highEdgeCase() {
+		String highEdge = "111111111111111111111111";
+		assertEquals(16777215, utility.turnToInt(highEdge));
+	}
+	
+	@Test
+	public void turnToInt_lowEdgeCase() {
+		String lowEdge = "00000000000000000000000";
+		assertEquals(0, utility.turnToInt(lowEdge));
+	}
+	
+	@Test
+	public void turnToString_1() {
+		String stringFor1 = "00000000000000000000001";
+		assertEquals(stringFor1, utility.turnToString(1));
+	}
 
 }
