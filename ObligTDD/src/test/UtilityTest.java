@@ -42,8 +42,15 @@ public class UtilityTest {
 	
 	@Test
 	public void turnToString_1() {
-		String stringFor1 = "00000000000000000000001";
+		String stringFor1 = "000000000000000000000001";
 		assertEquals(stringFor1, utility.turnToString(1));
 	}
+	
+	@Test
+	public void turnToString_2() {
+		String stringFor2 = "000000000000000000000010";
+		assertEquals(stringFor2, utility.turnToString(2));
+	}
+	
 
 }
