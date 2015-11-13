@@ -38,6 +38,21 @@ public class Utility {
 	}
 
 	public int turnToIntFromHex(String hex) {
-		return 1;
+		if(hex.length() > 6){
+			throw new IllegalArgumentException();
+		}
+		
+		int value = 0;
+		for(int i = 0; i < hex.length(); i++){
+			for(int j = 0; j < 9; j++){
+				if(hex.charAt(i) == '0'+j){
+					value += j * (int) Math.pow(16, hex.length() - i - 1);
+				}
+				else if(hex.charAt(i) == 'A'+j){
+					value += (10+j) * (int) Math.pow(16, hex.length() - i - 1);
+				}
+			}
+		}
+		return value;
 	}
 }

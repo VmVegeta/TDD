@@ -81,5 +81,28 @@ public class UtilityTest {
 		String valueTo1 = "000001";
 		assertEquals(1, utility.turnToIntFromHex(valueTo1));
 	}
-
+	
+	@Test
+	public void turnToIntFromHex_31() {
+		String valueTo31 = "00001F";
+		assertEquals(31, utility.turnToIntFromHex(valueTo31));
+	}
+	
+	@Test
+	public void turnToIntFromHex_highEdge() {
+		String valueOfHigh = "FFFFFF";
+		assertEquals(16777215, utility.turnToIntFromHex(valueOfHigh));
+	}
+	
+	@Test
+	public void turnToIntFromHex_lowEdge() {
+		String valueOfLow = "000000";
+		assertEquals(0, utility.turnToIntFromHex(valueOfLow));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void turnToIntFromHex_over6() {
+		String valueOfOver = "0000000";
+		assertEquals(0, utility.turnToIntFromHex(valueOfOver));
+	}
 }
