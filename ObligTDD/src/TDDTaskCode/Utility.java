@@ -91,7 +91,7 @@ public class Utility {
 				hexString.append('0');
 			}
 		}
-
+		
 		return hexString.toString();
 	}
 }

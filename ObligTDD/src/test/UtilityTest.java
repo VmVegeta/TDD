@@ -42,7 +42,7 @@ public class UtilityTest {
 	
 	@Test
 	public void turnToInt_lowEdgeCase() {
-		String lowEdge = "00000000000000000000000";
+		String lowEdge = "";
 		assertEquals(0, utility.turnToInt(lowEdge));
 	}
 	
@@ -60,14 +60,12 @@ public class UtilityTest {
 	
 	@Test(expected = IllegalArgumentException.class)
     public void turnToString_over24() {
-        String stringForOver = "000000000000000000000000";
-        assertEquals(stringForOver, utility.turnToString(66777215));
+        assertEquals("", utility.turnToString(66777215));
     }
 	
 	@Test(expected = IllegalArgumentException.class)
     public void turnToString_under0() {
-        String stringForOver = "000000000000000000000000";
-        assertEquals(stringForOver, utility.turnToString(-1));
+        assertEquals("", utility.turnToString(-1));
     }
 	
 	@Test
@@ -102,7 +100,7 @@ public class UtilityTest {
 	
 	@Test
 	public void turnToIntFromHex_lowEdge() {
-		String valueOfLow = "000000";
+		String valueOfLow = "";
 		assertEquals(0, utility.turnToIntFromHex(valueOfLow));
 	}
 	
