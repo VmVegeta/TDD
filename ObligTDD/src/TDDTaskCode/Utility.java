@@ -83,15 +83,28 @@ public class Utility {
 						}else{
 							hexString.append(j);
 						}
-					value -= Math.pow(2, i);
-					break;
+						value -= j*Math.pow(16, i);
+						break;
 					}
 				}
 			}else{
 				hexString.append('0');
 			}
 		}
-		
+
 		return hexString.toString();
+	}
+
+	public String operator(String operator, String firstBit, String secondBit) {
+		int firstBitValue = turnToInt(firstBit);
+		int secondBitValue = turnToInt(secondBit);
+
+		if(operator.equals("1")){
+			return turnToString(firstBitValue & secondBitValue);
+		}else if(operator.equals("2")){
+			return turnToString(firstBitValue | secondBitValue);
+		}
+		
+		throw new IllegalArgumentException();
 	}
 }

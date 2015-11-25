@@ -11,65 +11,65 @@ public class UtilityTest {
 	Utility utility = new Utility();
 
 	@Test
-	public void turnToInt_1() {
+	public void one_turnToInt_1() {
 		String valueTo1 = "0000001";
 		assertEquals(1, utility.turnToInt(valueTo1));
 	}
 	
 	@Test
-	public void turnToInt_2() {
+	public void two_turnToInt_2() {
 		String valueTo2 = "00000010";
 		assertEquals(2, utility.turnToInt(valueTo2));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void turnToInt_overSize24() {
+	public void stringLength25_turnToInt_throwIllegal() {
 		String toBig = "00000000000000000000000000";
-		assertEquals(0,utility.turnToInt(toBig));
+		utility.turnToInt(toBig);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void turnToInt_unknownSign() {
+	public void unknownSigns_turnToInt_throwIllegal() {
 		String unknownSigns = "qwer45376+!3#";
-		assertEquals(0,utility.turnToInt(unknownSigns));
+		utility.turnToInt(unknownSigns);
 	}
 	
 	@Test
-	public void turnToInt_highEdgeCase() {
+	public void highEdgeCase_turnToInt_16777215() {
 		String highEdge = "111111111111111111111111";
 		assertEquals(16777215, utility.turnToInt(highEdge));
 	}
 	
 	@Test
-	public void turnToInt_lowEdgeCase() {
+	public void lowEdgeCase_turnToInt_0() {
 		String lowEdge = "";
 		assertEquals(0, utility.turnToInt(lowEdge));
 	}
 	
 	@Test
-	public void turnToString_1() {
+	public void one_turnToString_1() {
 		String stringFor1 = "000000000000000000000001";
 		assertEquals(stringFor1, utility.turnToString(1));
 	}
 	
 	@Test
-	public void turnToString_2() {
+	public void two_turnToString_2() {
 		String stringFor2 = "000000000000000000000010";
 		assertEquals(stringFor2, utility.turnToString(2));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-    public void turnToString_over24() {
-        assertEquals("", utility.turnToString(66777215));
+    public void over24_turnToString_throwIllegal() {
+       utility.turnToString(66777215);
     }
 	
 	@Test(expected = IllegalArgumentException.class)
-    public void turnToString_under0() {
-        assertEquals("", utility.turnToString(-1));
+    public void under0_turnToString_throwIllegal() {
+        utility.turnToString(-1);
     }
 	
 	@Test
-	public void turnToString_highEdge_16777215() {
+	public void highEdge_turnToString_16777215() {
 		String stringForHighCase = "111111111111111111111111";
 		assertEquals(stringForHighCase, utility.turnToString(16777215));
 	}
@@ -150,5 +150,29 @@ public class UtilityTest {
 		assertEquals("", utility.turnToHex(-1));
 	}
 	
+	@Test
+	public void threeAnd3_operator_3() {
+		assertEquals("000000000000000000000011", utility.operator("1", "011", "011"));
+	}
+	
+	@Test
+	public void fiveOr5_operator_5() {
+		assertEquals("000000000000000000000101", utility.operator("2", "101", "101"));
+	}
+	
+	@Test
+	public void threeAnd5_operator_1() {
+		assertEquals("000000000000000000000001", utility.operator("1", "11", "000000101"));
+	}
+	
+	@Test
+	public void threeOr5_operator_1() {
+		assertEquals("000000000000000000000111", utility.operator("2", "000011", "0000101"));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void operator3_operator_illegal() {
+		utility.operator("3", "0", "0");
+	}
 	
 }
