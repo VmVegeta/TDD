@@ -28,7 +28,7 @@ public class InputAndOutput {
 
 	public void handleLine(StringBuilder makeString, String line) {
 		String[] split = line.split(" ");
-		if(split.length > 4){
+		if(split.length != 4){
 			throw new IllegalArgumentException();
 		}
 
@@ -43,9 +43,9 @@ public class InputAndOutput {
 	}
 
 	public void writeToFile(FileOutputStream outputStream) throws IOException {
-		for (HashMap.Entry<Integer, StoredData> entry : map.entrySet()){
-			outputStream.write((entry.getValue().getHex() + " " + entry.getValue().getOperator() + " " 
-		+ entry.getValue().getFirstBitString() + " " + entry.getValue().getSecondBitString() + "\n").getBytes());
+		for (HashMap.Entry<Integer, StoredData> storedElement : map.entrySet()){
+			outputStream.write((storedElement.getValue().getHex() + " " + storedElement.getValue().getOperator() + " " 
+		+ storedElement.getValue().getFirstBitString() + " " + storedElement.getValue().getSecondBitString() + "\n").getBytes());
 		}
 	}
 

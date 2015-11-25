@@ -48,7 +48,9 @@ public class Utility {
 			if(hex.charAt(i) != '0' && hex.charAt(i) != '1' && hex.charAt(i) != '2' && hex.charAt(i) != '3' &&
 					hex.charAt(i) != '4' && hex.charAt(i) != '5' && hex.charAt(i) != '6' && hex.charAt(i) != '7' &&
 					hex.charAt(i) != '8' && hex.charAt(i) != '9' && hex.charAt(i) != 'a' && hex.charAt(i) != 'b' &&
-					hex.charAt(i) != 'c' && hex.charAt(i) != 'd' && hex.charAt(i) != 'e' && hex.charAt(i) != 'f'){
+					hex.charAt(i) != 'c' && hex.charAt(i) != 'd' && hex.charAt(i) != 'e' && hex.charAt(i) != 'f' && 
+					hex.charAt(i) != 'A' && hex.charAt(i) != 'B' && hex.charAt(i) != 'C' && hex.charAt(i) != 'D' && 
+					hex.charAt(i) != 'E' && hex.charAt(i) != 'F'){
 				throw new IllegalArgumentException();
 			}
 		}
@@ -60,6 +62,8 @@ public class Utility {
 					value += j * (int) Math.pow(16, hex.length() - i - 1);
 				}
 				else if(hex.charAt(i) == 'a'+j){
+					value += (10+j) * (int) Math.pow(16, hex.length() - i - 1);
+				}else if(hex.charAt(i) == 'A'+j){
 					value += (10+j) * (int) Math.pow(16, hex.length() - i - 1);
 				}
 			}

@@ -6,16 +6,12 @@ import static org.mockito.Mockito.*;
 import static junit.framework.TestCase.assertEquals;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 
 import org.junit.Test;
-import org.mockito.InOrder;
 
 import TDDTaskCode.InputAndOutput;
-import TDDTaskCode.StoredData;
 
 public class InputAndOutputTest{
 
@@ -41,22 +37,28 @@ public class InputAndOutputTest{
 	@Test
 	public void twoLinesSameID_readFromFile_addedOnlyOneToMap() throws IOException {
 		BufferedReader mockBuffer = mock(BufferedReader.class);
-		when(mockBuffer.readLine()).thenReturn("000001 1 01010101010101010101010 111111110000000011111111","000001 2 10101010101010101010101 000000001111111100000000", (String) null);
+		when(mockBuffer.readLine()).thenReturn("000001 1 01010101010101010101010 111111110000000011111111",
+				"000001 2 10101010101010101010101 000000001111111100000000", (String) null);
 		inputAndOutput.readFromFile(mockBuffer);
 		assertEquals(1, inputAndOutput.getSize());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void fiveArguments_readFromFile_throwIllegal() throws IOException {
-		BufferedReader mockBuffer = mock(BufferedReader.class);
-		when(mockBuffer.readLine()).thenReturn("000001 1 01010101010101010101010 111111110000000011111111 1001010101");
-		inputAndOutput.readFromFile(mockBuffer);
+	public void fiveArguments_handleLine_throwIllegal() {
+		inputAndOutput.handleLine((StringBuilder) null, "000001 1 01010101010101010101010 111111110000000011111111 1001010101");
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void threeArguments_handleLine_throwIllegal() {
+		inputAndOutput.handleLine((StringBuilder) null, "000001 1 01010101010101010101010");
+	}
+
 
 	@Test
 	public void twoLinesSameID_readfromFile_addedToError() throws IOException {
 		BufferedReader mockBuffer = mock(BufferedReader.class);
-		when(mockBuffer.readLine()).thenReturn("000001 1 01010101010101010101010 111111110000000011111111","000001 2 10101010101010101010101 000000001111111100000000", (String) null);
+		when(mockBuffer.readLine()).thenReturn("000001 1 01010101010101010101010 111111110000000011111111",
+				"000001 2 10101010101010101010101 000000001111111100000000", (String) null);
 		inputAndOutput.readFromFile(mockBuffer);
 		assertEquals(1, inputAndOutput.getErrorSize());
 	}
@@ -76,7 +78,7 @@ public class InputAndOutputTest{
 		inputAndOutput.readFromFile(mockBuffer);
 		assertEquals("000001", inputAndOutput.getElement("000001").getHex());
 	}
-	
+
 	@Test
 	public void outputstram_writeToFile_storedMap() throws IOException {
 		FileOutputStream outputStreamMock = mock(FileOutputStream.class);
